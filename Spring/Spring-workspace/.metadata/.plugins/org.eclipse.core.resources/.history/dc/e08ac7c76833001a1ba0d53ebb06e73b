@@ -1,0 +1,59 @@
+package com.study.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.study.service.UserServiceInterface;
+import com.study.vo.User;
+
+public class UserRestController {
+	
+	@Autowired
+	UserServiceInterface service;
+	
+	// get: url로 이동
+	@GetMapping("/selectAll")
+	List<User> selectAll() {
+		return service.selectAll();
+	}
+	
+	// @PathVariable: url경로에 변수 넣을 때 사용
+	@GetMapping("/selectOne/{num}")
+	Map<String, String> selectOne(@PathVariable int num) {
+		Map<String, String> map = new HashMap<>();  // 리스트로 받겠다는 의미
+		User u = service.selectOne(num);  // u를 지정, 이때 selectOne(num)에서 num은 @PathVariable의 num
+		map.put("name", u.getName());  // getName -> vo에서 getter
+	}
+	
+	// @RequestBody: 자바 객체를 HTTP 응답 몸체로 변환
+	@PostMapping("/insert")
+	Map<String, String> insert(@RequestBody User u) {
+		service.insert(u);
+		// 부모                                                  자식
+		// 부모가 자식보다 크기는 작다
+		// 앞으로 사용할 것은  map.___으로 사용할 것!
+		Map<String, String> map = new HashMap<>();
+		map.put("result", "성공적으로 추가됨!");
+		return map;
+	}
+	
+	@PutMapping("/update")
+	Map<String, String> update(@RequestBody User u) {
+		service.update(u);
+		Map<String, String> map = new HashMap<>();
+		map.put("result", "성공적으로 업데이트됨!")
+		return map;
+	}
+	
+	
+	
+
+}

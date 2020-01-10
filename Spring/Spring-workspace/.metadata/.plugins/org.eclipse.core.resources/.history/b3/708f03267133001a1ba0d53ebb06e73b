@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="gayoung">
+	
+	<select id="selectAll" resultType="User">
+		select num,name,message from user
+	</select>
+	 
+	<select id="selectOne" parameterType="string" resultType="User">
+		select num,name,message from user where num=#{num}
+	</select>
+	
+	<insert id="insert" parameterType="User">
+		insert into user(num,name,message) values(null,#{name},#{message})
+	</insert>
+	
+	
+	
+	<delete id="delete" parameterType="string">
+		delete from user where num=#{num}
+	</delete>
+	
+	
+	<update id="update" parameterType="User">
+		update user
+		set name=#{name}, message=#{message}
+		where num=#{num}
+	</update>
+</mapper>

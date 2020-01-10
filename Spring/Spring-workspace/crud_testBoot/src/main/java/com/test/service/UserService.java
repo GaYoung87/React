@@ -1,0 +1,42 @@
+package com.test.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.test.dao.UserDAO;
+import com.test.vo.User;
+
+@Service("userservice")
+public class UserService implements UserServiceInterface {
+
+	@Autowired
+	UserDAO dao;
+	
+	@Override
+	public List<User> selectAll() {
+		return dao.selectAll();
+	}
+
+	@Override
+	public User selectOne(int num) {
+		return dao.selectOne(num);
+	}
+
+	@Override
+	public void insert(User u) {
+		dao.insert(u);
+	}
+
+	@Override
+	public void update(User u) {
+		dao.update(u);
+	}
+
+	@Override
+	public void delete(String num) {
+		dao.delete(num);
+	}
+
+}

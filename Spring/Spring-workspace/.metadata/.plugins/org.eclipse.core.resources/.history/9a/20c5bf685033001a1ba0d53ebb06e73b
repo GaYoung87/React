@@ -1,0 +1,23 @@
+package com.study.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.study.vo.User;
+
+public class UserDAO {
+	
+	// 객체의 의존성
+	// controller는 service에게 일하라고 시키고, service는 dao에 일하라고 시키고, dao는 sql에 일하라고 시키는 것임
+	@Autowired
+	SqlSession session;
+	
+	// List<User> -> python에서 list의미
+	// 이때, List는 List.util을 자동완성 해야함
+	public List<User> selectAll() {
+		return session.selectList('gayoung.selectAll');
+	}
+
+}

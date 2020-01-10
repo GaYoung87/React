@@ -1,0 +1,37 @@
+package com.study.vo;
+
+public class User {
+	private int num;
+	private String name;
+	private String message;
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	@Override
+	public String toString() {
+		return "User [num=" + num + ", name=" + name + ", message=" + message + "]";
+	}
+	public User(int num, String name, String message) {
+		super();
+		this.num = num;
+		this.name = name;
+		this.message = message;
+	}
+	
+	
+}
