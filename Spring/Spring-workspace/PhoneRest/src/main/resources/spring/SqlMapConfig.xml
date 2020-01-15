@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 1. typeAliases : VO에 대한 별칭 지정 -->
+    <typeAliases>
+        <typeAlias alias="Phone" type="com.ssafy.pms.vo.Phone"/>
+        <typeAlias alias="User"  type="com.ssafy.pms.vo.User"/>
+    </typeAliases>
+	
+    <!-- 3. mapper file: table&object mapping -->
+    <mappers>
+      <mapper resource="spring/PhoneMapper.xml" />
+      <mapper resource="spring/UserMapper.xml" />
+    </mappers>
+</configuration>

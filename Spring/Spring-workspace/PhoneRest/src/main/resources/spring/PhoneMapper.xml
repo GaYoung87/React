@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- mapper file: 실행 할 쿼리 문을 저장하는 파일. 테이블 하나당 한개씩 작성 namespace: 작업하는 테이블들을 
+	구분해주기 위한 식별자 -->
+<mapper namespace="pms.phone">
+	<select id="selectAll" resultType="Phone">
+		select p.num num, p.model model, p.price price, c.vendor vcode
+		from phones p, company c
+		where p.vcode=c.vcode
+	</select>
+	<select id="selectOne" resultType="Phone" parameterType="java.lang.String">
+		select p.num num, p.model model, p.price price, c.vendor vcode
+		from phones p, company c
+		where p.vcode=c.vcode and num=#{num}
+	</select>
+	<insert id="insert" parameterType="Phone">
+		insert into phones
+		values(#{num},#{model},#{price},#{vcode})
+	</insert>
+	<update id="update" parameterType="Phone">
+		update phones set model=#{model}, price=#{price} where num=#{num}
+	</update>
+	<delete id="delete" parameterType="java.lang.String">
+		delete from phones where num=#{num}
+	</delete>	
+</mapper>
