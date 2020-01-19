@@ -1,0 +1,53 @@
+package com.study.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.study.vo.User;
+
+// 해당 클래스가 DAO라는 것을 알리기 위해 @repository작성
+// implements로 인터페이스를 구현해주고 필요한 메소드를 오버라이드 하여 정의
+@Repository("userdao")
+public class UserDAO {
+	
+	// 객체의 의존성
+	// controller는 service에게 일하라고 시키고, service는 dao에 일하라고 시키고, dao는 sql에 일하라고 시키는 것임
+	@Autowired
+	SqlSession session;  // session = db
+	
+	// selectAll: 모든 db보여줌
+	// List<User> -> python에서 list의미
+	// 이때, List는 List.util을 자동완성 해야함
+	public List<User> selectAll() {
+		return session.selectList("gayoung.selectAll");
+	}
+	
+	// selectOne: db중에 하나 보여줌
+	// User에서 num123과 동일한 num을 가지고있는 정보를 보여주겠다
+	public User selectOne(int num123) {
+		return session.selectOne("gayoung.selectOne", num123);
+	}
+	
+	// insert는 데이터를 추가하는 것임 -> 추가된 데이터는 selectAll을 통해 확인가능
+	// void: return되는 데이터 타입이 없
+	public boolean insert(User u123) {
+		try {
+			session.insert("gayoung.insert", u123);
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
+	}
+	
+	public void update(User u) {
+		session.update("gayoung.update", u);
+	}
+	
+	public void delete(int num) {
+		 session.delete("gayoung.delete", num);
+	 }
+
+}
